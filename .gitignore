@@ -2,3 +2,4 @@ calls_for_service_nypd_venv/
 .env
 nypd_api_call_defunct.py 
 calls_for_service_nypd_venv
+__pycache__/postgres_config.cpython-311.pyc
