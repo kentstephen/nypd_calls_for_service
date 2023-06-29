@@ -10,7 +10,7 @@ Start with the postgres_config.py, there you will need to enter your postgres cr
 
 Then move to create_db_and_schema.py where you will create the database and schema, this should only be run once, but it has error handling that won't create duplicates if you need to run again.
 
-Then you can move to the nypd_api_call.py and get the data. This generally runs overnight when I start it so keep that in mind. I have added print statements to track your progress.
+Then you can move to the nypd_api_call.py and get the data. This generally runs overnight when I start it so keep that in mind. I have added print statements to track your progress. If your ETL gets interrupted, check the row count in Postgres and then set the skip funtion to that number and run the program again.
 
 Then, once you have everything, you can move to the analysis_notebook.ipynb and run the data through some analysis.
 
