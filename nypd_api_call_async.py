@@ -3,7 +3,7 @@ import psycopg2
 import asyncio
 import aiohttp
 #importing our postgres creds
-from postgres_config import POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER
+from A_postgres_config import POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER
 
 url = "https://data.cityofnewyork.us/api/odata/v4/d6zx-ckhd"
 
