@@ -10,7 +10,7 @@ This is a project to download and analyze NYC Open Data's Historic 911 Calls for
 
  
 
-  ## Steps to run the application
+  ## Steps to run the application:
 
 I have included a requirements.txt you can download all the dependencies when you create your virtual environment.
 
@@ -24,7 +24,7 @@ I have included a requirements.txt you can download all the dependencies when yo
 
  4. Then, once you have everything, you can move to the analysis_notebook.ipynb and run the data through some analysis.
 
-## In development, coming soon
+## In development, coming soon:
 
   The async api call script is something I"m working to speed up the download, since there are no limits on the api. The weather data script is also something I'm working on and will add to the analysis notebook soon, for some visualizations.
   
