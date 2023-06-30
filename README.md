@@ -15,8 +15,7 @@ This is a project to download and analyze NYC Open Data's Historic 911 Calls for
 I have included a requirements.txt you can download all the dependencies when you create your virtual environment.
 
   
-
- 1. Start with the postgres_config.py, there you will need to enter your postgres credentials.
+ 1. Start with the [postgres_config.py](A_postgres_config.py), there you will need to enter your postgres credentials.
 
  2. Then move to create_db_and_schema.py where you will create the database and schema, this should only be run once, but it has error handling that won't create duplicates if you need to run again.
 
