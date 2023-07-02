@@ -93,12 +93,14 @@ while not no_data_flag: #as long as this no_data_flag is false the program will 
     response = requests.get(url_with_skip)
     try:
         data = response.json()
-        if 'value' not in data: # got an error that value wasn't in the response so we tell it to keep going anyway
+        if 'value' not in data:
             continue
         data_dict = data['value']
-    #this will handle any errors but will break the loop and end the program
-    except KeyError:
-        print("Error: there was an error in the response, which is:")
-        print(response.content)
+    except requests.exceptions.JSONDecodeError as e:
+        print("Error: Failed to parse JSON response.")
+        print(e)
         continue
-
+    except Exception as e:
+        print("Error occurred during API request.")
+        print(e)
+        continue
