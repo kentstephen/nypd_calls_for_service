@@ -62,7 +62,6 @@ while not no_data_flag: #as long as this no_data_flag is false the program will 
             elapsed_time = time.time() - start_time
             formattted_time = format_time(elapsed_time)
             print(f"\nAwesome, you did it! At {endTime}: {formattted_time} after the program started, {row_count} rows were inserted into your table.")
-            curs.commit()
             no_data_flag = True
 
     with conn, conn.cursor() as curs:
@@ -85,7 +84,8 @@ while not no_data_flag: #as long as this no_data_flag is false the program will 
         if total_rows_inserted in milestones:
             elapsed_time = time.time() - start_time
             formattted_time = format_time(elapsed_time)
-            print(f"{formattted_time} after the program began, {total_rows_inserted} rows have been inserted into Postgres table")
+            milestone_time = CurrentDateAndTime.strftime("%I:%M:%p")
+            print(f"At {milestone_time}, {formattted_time} after the program began, {total_rows_inserted} rows have been inserted into PG table")
     # Increase the skip parameter by the number of rows retrieved in the previous request
     skip += len(data_dict)
     # Fetch the next set of data
