@@ -67,9 +67,9 @@ while not no_data_flag: #as long as this no_data_flag is false the program will 
     with conn, conn.cursor() as curs:
         rows_to_insert = []
         for row in data_dict: #insert the data into prostgres
-            rows_to_insert.append((
+            rows_to_insert.append(( 
                 row['__id'], row['objectid'], row['cad_evnt_id'], 
-                row['create_date'], row['incident_date'], row['incident_time'], 
+                row['create_date'], row['incident_date'], row['incident_time'], # why are these called rows instead of columns
                 row['nypd_pct_cd'], row['boro_nm'], row['patrl_boro_nm'], 
                 row['geo_cd_x'], row['geo_cd_y'], row['radio_code'], 
                 row['typ_desc'], row['cip_jobs'], row['add_ts'], 
