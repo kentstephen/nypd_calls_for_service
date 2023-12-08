@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 CurrentDateAndTime = datetime.now()
 #importing our postgres creds
-from A_postgres_config import POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER
+from postgres_config import POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER
 
 url = "https://data.cityofnewyork.us/api/odata/v4/d6zx-ckhd"
 

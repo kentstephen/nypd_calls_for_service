@@ -1,5 +1,5 @@
 import psycopg2
-from A_postgres_config import POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER
+from postgres_config import POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER
 from datetime import datetime
 # Connect to the database
 conn = psycopg2.connect(

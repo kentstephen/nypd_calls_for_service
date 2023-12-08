@@ -1,15 +1,16 @@
+## THIS FILE RUNS MUCH FASTER THAN npd_api_call.py, but it requires attention
 import concurrent.futures
 import requests
 import time
 import psycopg2.pool
-from A_postgres_config import POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER
+from postgres_config import POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_USER
 import math 
 
 # api url
 url = "https://data.cityofnewyork.us/api/odata/v4/d6zx-ckhd"
 #number of records per request, the max for this api
 records_per_request = 50000
-#number of workers
+#number of workers, depepnding on your machine, this worked on my thinkpad
 max_workers = 20
 
 # select statement using SQL to figure out how many rows is in the dataset
@@ -22,7 +23,7 @@ print(data)
 # the response is a dictionary with one entry so we index to 0 the first one then call for the key value
 num_records = data[0]['count']
 #print(num_records)
-# we need to format the number of requests so it's divisble by 50,000 then below we round up
+# we need to format the number of requests so it's divisible by 50,000 then below we round up
 moved_decimal = int(num_records) / int(records_per_request)
 num_requests = math.ceil(moved_decimal)
 
@@ -87,7 +88,7 @@ def fetch_and_insert_data(skip):
             #print("Inserting records into the database")
                 with conn.cursor() as curs:
                     curs.executemany(
-                        "INSERT INTO sch_nypd_calls_tables.tb_call_data_conc_2 (__id, objectid, cad_evnt_id, create_date, incident_date, incident_time, nypd_pct_cd, boro_nm, patrl_boro_nm, geo_cd_x, geo_cd_y, radio_code, typ_desc, cip_jobs, add_ts, disp_ts, arrivd_ts, closng_ts, latitude, longitude) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                        "INSERT INTO sch_nypd_calls_tables.tb_call_data (__id, objectid, cad_evnt_id, create_date, incident_date, incident_time, nypd_pct_cd, boro_nm, patrl_boro_nm, geo_cd_x, geo_cd_y, radio_code, typ_desc, cip_jobs, add_ts, disp_ts, arrivd_ts, closng_ts, latitude, longitude) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         records_to_insert
                     )
                     conn.commit()

@@ -1,7 +1,7 @@
-from A_postgres_config import POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB
+from postgres_config import POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB
 
 
-# This test simply verifies that each of the variables imported from A_postgres_config.py is a string.
+# This test simply verifies that each of the variables imported from postgres_config.py is a string.
 # In a real-world scenario, you might also want to test that these values meet certain conditions
 # (e.g., the host is a valid IP address or hostname, the port is a valid port number, etc.).
 

@@ -61,3 +61,4 @@ ON
     j.typ_desc = d.typ_desc
 GROUP BY j.typ_desc, j.jan_6_count
 ORDER BY j.jan_6_count DESC;
+t

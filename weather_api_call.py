@@ -1,7 +1,7 @@
-from D_select_start_and_end_date import start_date, end_date
+from select_start_and_end_date import start_date, end_date
 import requests
 import pandas as pd
-from A_postgres_config import POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER
+from postgres_config import POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER
 
 url = f'https://archive-api.open-meteo.com/v1/archive?latitude=40.71&longitude=-74.01&start_date={start_date}&end_date={end_date}&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FNew_York&temperature_unit=fahrenheit'
 
