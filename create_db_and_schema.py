@@ -70,7 +70,7 @@ def create_schema(database_name, schema_name):
     if not table_exists:
         try:
             with conn, conn.cursor() as curs:
-                curs.execute(f"CREATE TABLE IF NOT EXISTS {schema_name}.{table_name} (__id VARCHAR(30), objectid INTEGER, cad_evnt_id INTEGER, create_date TIMESTAMP, incident_date TIMESTAMP, incident_time VARCHAR(30), nypd_pct_cd INTEGER, boro_nm TEXT, patrl_boro_nm TEXT, geo_cd_x INTEGER, geo_cd_y INTEGER, radio_code VARCHAR(6), typ_desc TEXT, cip_jobs TEXT, add_ts TIMESTAMP, disp_ts TIMESTAMP, arrivd_ts TIMESTAMP, closng_ts TIMESTAMP, latitude NUMERIC, longitude NUMERIC)")
+                curs.execute(f"CREATE TABLE IF NOT EXISTS {schema_name}.{table_name} (__id VARCHAR(30), objectid INTEGER, cad_evnt_id INTEGER, create_date DATE, incident_date DATE, incident_time TIME, nypd_pct_cd INTEGER, boro_nm TEXT, patrl_boro_nm TEXT, geo_cd_x INTEGER, geo_cd_y INTEGER, radio_code VARCHAR(6), typ_desc TEXT, cip_jobs TEXT, add_ts TIMESTAMP, disp_ts TIMESTAMP, arrivd_ts TIMESTAMP, closng_ts TIMESTAMP, latitude NUMERIC, longitude NUMERIC)")
             conn.commit()
             print("Table created.")
         except psycopg2.Error as e:
