@@ -11,7 +11,7 @@ conn = psycopg2.connect(
 )
 
 with conn, conn.cursor() as curs:
-    curs.execute("SELECT MAX(incident_date), MIN(incident_date) FROM sch_nypd_calls_tables.tb_call_data")
+    curs.execute("SELECT MAX(incident_date), MIN(incident_date) FROM tb_call_data")
     result = curs.fetchone()
 end_date = (result[0].strftime('%Y-%m-%d'))
 start_date = (result[1].strftime('%Y-%m-%d'))

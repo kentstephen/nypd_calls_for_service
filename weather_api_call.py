@@ -16,8 +16,8 @@ new_df.reset_index(drop=True, inplace=True) #drop the old index
 
 column_mapping = {
     'daily.time': 'date',
-    'daily.temperature_2m_max': 'daily_temp_maximum',
-    'daily.temperature_2m_min': 'daily_temp_minimum'
+    'daily.temperature_2m_max': 'daily_temp_max',
+    'daily.temperature_2m_min': 'daily_temp_min'
 }
 
 new_df = new_df.rename(columns=column_mapping)
@@ -26,6 +26,6 @@ new_df = new_df.rename(columns=column_mapping)
 from sqlalchemy import create_engine
 engine= create_engine(f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}')
 #insert into postgres
-new_df.to_sql('tb_weather_data', engine, if_exists='replace', index=False, schema='sch_nypd_calls_tables')
+new_df.to_sql('tb_weather_data', engine, if_exists='replace', index=False)
 engine.dispose()
 

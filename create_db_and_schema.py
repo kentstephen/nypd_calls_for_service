@@ -48,29 +48,19 @@ def create_schema(database_name, schema_name):
 
     cursor = conn.cursor()
     # identifying our schema and seeing if it exists and if not to make it
-    check_schema_query = f"SELECT EXISTS(SELECT 1 FROM information_schema.schemata WHERE schema_name = '{schema_name}')"
-    cursor.execute(check_schema_query)
-    schema_exists = cursor.fetchone()[0]
-
-    if not schema_exists:
-        # if it doesn't exist we create the schema
-        create_schema_query = f"CREATE SCHEMA {schema_name}"
-        cursor.execute(create_schema_query)
-        print("Schema created!")
-    else:
-        print("Schema found")  # we don't need to re create it we don't want duplicates
+  
 
     # Create a new table in the database
     cursor = conn.cursor()
     table_name = 'tb_call_data'
-    check_table_query = f"SELECT EXISTS(SELECT FROM information_schema.tables WHERE table_schema = '{schema_name}' AND table_name = '{table_name}')"
+    check_table_query = f"SELECT EXISTS(SELECT FROM information_schema.tables WHERE table_name = '{table_name}')"
     cursor.execute(check_table_query)
     table_exists = cursor.fetchone()[0]
 
     if not table_exists:
         try:
             with conn, conn.cursor() as curs:
-                curs.execute(f"CREATE TABLE IF NOT EXISTS {schema_name}.{table_name} (__id VARCHAR(30), objectid INTEGER, cad_evnt_id INTEGER, create_date DATE, incident_date DATE, incident_time TIME, nypd_pct_cd INTEGER, boro_nm TEXT, patrl_boro_nm TEXT, geo_cd_x INTEGER, geo_cd_y INTEGER, radio_code VARCHAR(6), typ_desc TEXT, cip_jobs TEXT, add_ts TIMESTAMP, disp_ts TIMESTAMP, arrivd_ts TIMESTAMP, closng_ts TIMESTAMP, latitude NUMERIC, longitude NUMERIC)")
+                curs.execute(f"CREATE TABLE IF NOT EXISTS {table_name} (objectid INTEGER, cad_evnt_id INTEGER, create_date DATE, incident_date DATE, incident_time VARCHAR(50), nypd_pct_cd INTEGER, boro_nm TEXT, patrl_boro_nm TEXT, geo_cd_x INTEGER, geo_cd_y INTEGER, radio_code VARCHAR(6), typ_desc TEXT, cip_jobs TEXT, add_ts TIMESTAMP, disp_ts TIMESTAMP, arrivd_ts TIMESTAMP, closng_ts TIMESTAMP, latitude DECIMAL(8,6), longitude DECIMAL(9,6))")
             conn.commit()
             print("Table created.")
         except psycopg2.Error as e:
@@ -83,14 +73,14 @@ def create_schema(database_name, schema_name):
     # name our table
     weather_table_name = 'tb_weather_data'
     # query to see if it's already there
-    check_weather_table_query = f"SELECT EXISTS(SELECT FROM information_schema.tables WHERE table_schema = '{schema_name}' AND table_name = '{weather_table_name}')"
+    check_weather_table_query = f"SELECT EXISTS(SELECT FROM information_schema.tables WHERE table_name = '{weather_table_name}')"
     cursor.execute(check_weather_table_query)
     weather_table_exists = cursor.fetchone()[0]  # return a boolean value from the query
     # if it's not there we make it, and if it's already there it notifies us
     if not weather_table_exists:
         try:
             with conn, conn.cursor() as curs:
-                curs.execute(f"CREATE TABLE IF NOT EXISTS {schema_name}.{weather_table_name} (date DATE PRIMARY KEY, daily_temp_maximum FLOAT, daily_temp_minimum FLOAT)")
+                curs.execute(f"CREATE TABLE IF NOT EXISTS {weather_table_name} (date DATE PRIMARY KEY, daily_temp_maximum FLOAT, daily_temp_minimum FLOAT)")
             conn.commit()
             print("weather table created.")
         except psycopg2.Error as e:

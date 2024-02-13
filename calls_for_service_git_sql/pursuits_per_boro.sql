@@ -7,7 +7,7 @@ SELECT
     COUNT(CASE WHEN typ_desc = 'BROADCAST: CHASE/PURSUIT' AND boro_nm = 'STATEN ISLAND' THEN 1 END) AS staten_island_count,
     COUNT(CASE WHEN typ_desc = 'BROADCAST: CHASE/PURSUIT' AND boro_nm = 'BRONX' THEN 1 END) AS bronx_count
 FROM
-    sch_nypd_calls_tables.tb_call_data AS tcd
+    tb_call_data AS tcd
 GROUP BY
     incident_date
 ORDER BY

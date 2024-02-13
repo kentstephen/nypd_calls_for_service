@@ -11,7 +11,7 @@ url = "https://data.cityofnewyork.us/api/odata/v4/d6zx-ckhd"
 #number of records per request, the max for this api
 records_per_request = 50000
 #number of workers, depepnding on your machine, this worked on my thinkpad
-max_workers = 20
+
 
 # select statement using SQL to figure out how many rows is in the dataset
 len_url = 'https://data.cityofnewyork.us/resource/d6zx-ckhd.json?$select=count(*)'
@@ -30,7 +30,7 @@ num_requests = math.ceil(moved_decimal)
 # Create a connection pool
 pool = psycopg2.pool.SimpleConnectionPool(
     minconn=1,
-    maxconn=max_workers,
+    maxconn=10,
     host=POSTGRES_HOST,
     port=POSTGRES_PORT,
     dbname=POSTGRES_DB,
@@ -105,7 +105,7 @@ def fetch_and_insert_data(skip):
 
 if __name__ == '__main__':
     # Start the ThreadPoolExecutor
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+    with concurrent.futures.ThreadPoolExecutor() as executor:
         # Calculate the skip values for each worker
         skips = [i * records_per_request for i in range(num_requests)]
 
